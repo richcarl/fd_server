@@ -13,7 +13,7 @@ endif
 MODULES= fdsrv
 
 EBIN = ../ebin
-EBIN_FILES = $(MODULES:%=$(EBIN)/%.$(EMULATOR)) $(EBIN)/fd_server.app
+EBIN_FILES = $(MODULES:%=$(EBIN)/%.beam) $(EBIN)/fd_server.app
 
 
 all: $(EBIN_FILES)
