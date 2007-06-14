@@ -94,7 +94,7 @@ driver_check(Error) -> Error.
 %%----------------------------------------------------------------------
 %%----------------------------------------------------------------------
 
-handle_call({bind_socket, Type, Spec}, From, State) ->
+handle_call({bind_socket, Type, Spec}, _From, State) ->
     #state{dport = DPort, sport = SPort} = State,
     case lists:member(Type, [tcp, udp]) of
 	true ->
@@ -104,7 +104,7 @@ handle_call({bind_socket, Type, Spec}, From, State) ->
 	    {reply, {error, "Bad socket type"}, State}
     end;
 
-handle_call(stop, From, State) ->
+handle_call(stop, _From, State) ->
     {stop, normal, ok, State}.
 
 %%----------------------------------------------------------------------
@@ -112,13 +112,13 @@ handle_call(stop, From, State) ->
 handle_info({'EXIT', _, Reason}, State) ->
     {stop, Reason, State};
 
-handle_info({Port, {data, [1|Str]}}, State) ->
+handle_info({_Port, {data, [1|Str]}}, State) ->
     error_logger:format("fdsrv: ~s~n", [Str]),
     {noreply, State}.
 
 %%----------------------------------------------------------------------
 %%----------------------------------------------------------------------
-terminate(Reason, State) ->
+terminate(_Reason, State) ->
     #state{dport = DPort, sport = SPort} = State,
     DPort ! {self(), close},
     SPort ! {self(), close}.
