@@ -1,16 +1,18 @@
 
 include ../../../support/include.mk
 
-## don't build this under win32 at all
+
+## don't build this under win32 or mac osx at all
 ifdef WIN32
-
 PRIV_FILES = 
-
 else
-
+ifdef DARWIN
+PRIV_FILES = 
+else
 PRIV_FILES=../priv/fdsend_drv.so \
 	   ../priv/fdsrv \
 	   ../priv/fdsrv_drv.so 
+endif
 endif
 
 
