@@ -13,5 +13,5 @@ release: clean appfile
 	sh ../../support/create_release.sh
 
 appfile:
-	(cd src;$(MAKE) ../ebin/fd_server.app)
+	(cd src && $(MAKE) ../ebin/fd_server.app)
 
