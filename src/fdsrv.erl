@@ -16,7 +16,8 @@
 -export([start_driver/1]).
 
 %% gen_server callbacks
--export([init/1, handle_call/3, handle_info/2, terminate/2, code_change/3]).
+-export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2,
+	 code_change/3]).
 
 -record(state, {dport, sport}).
 
@@ -107,6 +108,8 @@ handle_call({bind_socket, Type, Spec}, _From, State) ->
 handle_call(stop, _From, State) ->
     {stop, normal, ok, State}.
 
+handle_cast(_, S) -> 
+    {noreply, S}.
 %%----------------------------------------------------------------------
 %%----------------------------------------------------------------------
 handle_info({'EXIT', _, Reason}, State) ->
