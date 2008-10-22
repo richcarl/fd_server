@@ -15,3 +15,5 @@ release: clean appfile
 appfile:
 	(cd src && $(MAKE) ../ebin/fd_server.app)
 
+docs:
+	(cd src && $(MAKE) docs)

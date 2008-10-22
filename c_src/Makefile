@@ -30,7 +30,6 @@ clean:
 	-rm -f $(PRIV_FILES) fdsrv_drv.o fdlib_pic.o fdlib.o \
 	       fdsend_drv.o fdsrv.o
 
-
 ../priv/fdsrv:	fdsrv.o	fdlib.o
 	$(CC) -o $@ fdsrv.o fdlib.o $(LIBS)
 	strip $@

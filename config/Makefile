@@ -17,5 +17,3 @@ clean:
 	-rm -f config.cache config.log config.status configure \
                $(MK_INCLUDE) $(CONFIG_H)
 	-rm -rf autom4te.cache
-
-
