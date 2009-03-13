@@ -158,13 +158,13 @@ no_nl([10|T]) ->
 no_nl(L) ->
     lists:reverse(L).
 
-create_spec(Port) when integer(Port) ->
+create_spec(Port) when is_integer(Port) ->
     [$:|integer_to_list(Port)];
-create_spec({{IP1,IP2,IP3,IP4}, Port}) when integer(IP1),
-					    integer(IP2),
-					    integer(IP3),
-					    integer(IP4),
-					    integer(Port) ->
+create_spec({{IP1,IP2,IP3,IP4}, Port}) when is_integer(IP1),
+					    is_integer(IP2),
+					    is_integer(IP3),
+					    is_integer(IP4),
+					    is_integer(Port) ->
     lists:flatten(io_lib:format("~p.~p.~p.~p:~p",
 				[IP1, IP2, IP3, IP4, Port])).
 
