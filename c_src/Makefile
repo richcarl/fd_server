@@ -18,7 +18,7 @@ endif
 
 CFLAGS += -I$(ERL_C_INCLUDE_DIR) -I../config -I.
 LIBS = -lresolv -lnsl 
-LD_SHARED = ld -shared
+LD_SHARED = gcc -shared
 
 #
 # Targets
