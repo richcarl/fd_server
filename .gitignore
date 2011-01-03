@@ -1,5 +1,5 @@
 *.o
 priv/*
-doc/html
+doc
 ebin
 deps

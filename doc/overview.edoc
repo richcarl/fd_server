@@ -1,0 +1,27 @@
+** this is the overview.doc file for the application 'fd_server' **
+@author Sebastian Strollo <seb@erix.ericsson.se>, 1998-08-03
+@author Fernando Benavides <greenmellon@gmail.com>
+@version 3.2.1
+@reference This was originally part of <a href="http://jungerl.sourceforge.net/">JungErl</a>
+@reference Check the project on <a href="https://github.com/elbrujohalcon/fd_server">Github</a>
+@title FD Server from JungErl
+@doc
+== Overview ==
+The fdserv.erl module makes it possible to open up privileged ports from Erlang running as non-root.
+== Usage ==
+Here is an example from the esmb_browser.erl code:
+<pre>
+...
+{ok, Fd} = open_socket(137, []),
+....
+
+open_socket(Port,Opts) ->
+  case fdsrv:bind_socket(udp, Port) of
+    {ok, Fd} ->
+      gen_udp:open(Port, [{fd, Fd}, binary, {broadcast,true} | Opts]);
+    Error ->
+      ?elog("Couldn't open socket, port=~p: ~p~n",[Port, Error])
+  end. 
+</pre>
+
+Here we open the NetBIOS-NameService port 137.
