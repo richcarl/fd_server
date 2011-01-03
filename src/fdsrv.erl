@@ -77,7 +77,7 @@ stop() ->
 init([]) ->
   process_flag(trap_exit, true),
   TmpName = tmpname(),
-  os:cmd(["rm -f ", TmpName]),
+  _ = os:cmd(["rm -f ", TmpName]),
   FdSrv = filename:join(code:priv_dir(fd_server), "fdsrv"),
   SPort = open_port({spawn, lists:flatten([FdSrv, " ", TmpName])},
                     [use_stdio, {packet, 1}]),
@@ -114,7 +114,7 @@ driver_check(Error) -> Error.
 %%----------------------------------------------------------------------
 %%----------------------------------------------------------------------
 %% @hidden
--spec handle_call(stop | {bind_socket, tcp|udp, string()}, _, state()) -> {reply, binary()|{error, string()}} | {stop, normal, ok, state()}.
+-spec handle_call(stop | {bind_socket, tcp|udp, string()}, _, state()) -> {reply, {ok, integer()}|{error, string()}, state()} | {stop, normal, ok, state()}.
 handle_call({bind_socket, Type, Spec}, _From, State) ->
   #state{dport = DPort, sport = SPort} = State,
   case lists:member(Type, [tcp, udp]) of
@@ -193,14 +193,14 @@ create_spec({{IP1,IP2,IP3,IP4}, Port}) when is_integer(IP1),
                               [IP1, IP2, IP3, IP4, Port])).
 
 %% @equiv test(8888)
--spec test() -> ok | {error, term()}.
+-spec test() -> _.
 test() -> test(8888).
 
 %% @doc  Opens an echo server on Port
 %% @spec test(pos_integer()) -> ok | {error, term()}
--spec test(pos_integer()) -> ok | {error, term()}.
+-spec test(pos_integer()) -> _.
 test(Port) ->
-  fdsrv:start(),
+  _ = fdsrv:start(),
   case fdsrv:bind_socket(tcp, Port) of
     {ok, Fd} ->
       {ok, LSock} = gen_tcp:listen(0, [{fd, Fd},
@@ -211,11 +211,10 @@ test(Port) ->
                 [Port, Fd, LSock]),
       {ok, Sock} = gen_tcp:accept(LSock),
       {ok, Data} = gen_tcp:recv(Sock, 0),
-      gen_tcp:send(Sock, Data),
+      ok = gen_tcp:send(Sock, Data),
       gen_tcp:close(Sock),
       gen_tcp:close(LSock),
       ok;
     Error ->
       Error
   end.
-
