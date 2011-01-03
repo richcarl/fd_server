@@ -1,17 +1,25 @@
-
-
 all:
-	(cd config;$(MAKE))
-	(cd src;$(MAKE))
+	rebar compile
 	-(cd c_src;$(MAKE) -k)
 
 clean:
-	(cd src;$(MAKE) clean)
 	(cd c_src;$(MAKE) clean)
+	rebar clean
 
-release: clean appfile
-	sh ../../support/create_release.sh
+test: all
+	rebar eunit
 
-appfile:
-	(cd src;$(MAKE) ../ebin/fd_server.app)
+build_plt: all
+	rebar build-plt
 
+analyze: all
+	rebar dialyze
+
+doc: all
+	rebar doc
+
+xref: all
+	rebar xref
+	
+run: all
+	erl -pa ../fd_server/ebin

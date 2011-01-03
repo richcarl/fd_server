@@ -1,0 +1,5 @@
+*.o
+priv/*
+doc/html
+ebin
+deps
