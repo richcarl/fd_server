@@ -1,5 +1,6 @@
 all:
 	rebar compile
+	@mkdir -p priv
 	-(cd c_src;$(MAKE) -k)
 
 clean:
