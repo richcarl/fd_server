@@ -31,8 +31,8 @@ clean:
 	$(CC) -o $@ fdsrv.o fdlib.o $(LIBS)
 	strip $@
 	@echo "****** TRYING TO SET THE SUPERUSER BIT FOR: " $@
-	-chown -v root $@
-	-chmod -v u+s $@
+	-sudo chown -v root $@
+	-sudo chmod -v u+s $@
 
 ../priv/fdsrv_drv.so: fdsrv_drv.o fdlib_pic.o
 	$(LD_SHARED) -o $@ fdsrv_drv.o fdlib_pic.o $(LIBS)
