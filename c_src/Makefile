@@ -11,7 +11,7 @@ PRIV_FILES=../priv/fdsend_drv.so \
 	   ../priv/fdsrv_drv.so 
 endif
 
-ERL_C_INCLUDE_DIR = -I/usr/local/lib/erlang/lib/erl_interface-3.7.1/include -I/usr/local/lib/erlang/erts-5.8.1/include
+ERL_C_INCLUDE_DIR = -I/usr/local/lib/erlang/usr/include
 CFLAGS += $(ERL_C_INCLUDE_DIR) -I../include -I. -fno-stack-protector
 LIBS = -lresolv -lnsl 
 LD_SHARED = ld -shared
