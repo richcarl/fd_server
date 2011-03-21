@@ -2,7 +2,6 @@ all:
 	rebar compile
 
 clean:
-	(cd c_src;$(MAKE) clean)
 	rebar clean
 
 test: all
