@@ -10,10 +10,12 @@
 # ifdef STDLIB_MALLOC
 #  include <stdlib.h>
 # else
+#  ifndef __APPLE__
 #  ifdef HAVE_MALLOC_H
 #   include <malloc.h>
 #  else
 #   error "Cannot find malloc"
+#  endif
 #  endif
 # endif
 #endif
