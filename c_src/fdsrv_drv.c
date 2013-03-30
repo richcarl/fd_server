@@ -55,6 +55,9 @@ DRIVER_INIT(fdsrv_drv)
     fdsrv_drv_entry.stop        = stop;
     fdsrv_drv_entry.ready_input = fd_is_ready;
     fdsrv_drv_entry.finish      = NULL;
+    fdsrv_drv_entry.extended_marker = ERL_DRV_EXTENDED_MARKER;
+    fdsrv_drv_entry.major_version = ERL_DRV_EXTENDED_MAJOR_VERSION;
+    fdsrv_drv_entry.minor_version = ERL_DRV_EXTENDED_MINOR_VERSION;
     return &fdsrv_drv_entry;
 }
 #endif
