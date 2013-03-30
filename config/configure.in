@@ -8,6 +8,12 @@ dnl Programs
 
 AC_PROG_CC
 
+AC_PATH_PROG(ERL, erl, erl)
+AC_PATH_PROG(ERLC, erlc, erlc)
+JUNGERL_DIR=$(dirname `pwd`)
+AC_SUBST(JUNGERL_DIR)
+ERLDIR=`awk -F= '/ROOTDIR=/ { print [$]2; exit; }' $ERL`
+AC_SUBST(ERLDIR)
 
 dnl C header files
 

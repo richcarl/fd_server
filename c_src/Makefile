@@ -1,5 +1,5 @@
 
-include ../../../support/include.mk
+include ../config/include.mk
 
 
 ## don't build this under win32 or mac osx at all
