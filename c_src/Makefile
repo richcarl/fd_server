@@ -1,24 +1,19 @@
 
-include ../../../support/include.mk
+include ../config/include.mk
 
 
-## don't build this under win32 or mac osx at all
+## don't build this under win32 at all
 ifdef WIN32
-PRIV_FILES = 
-else
-ifdef DARWIN
 PRIV_FILES = 
 else
 PRIV_FILES=../priv/fdsend_drv.so \
 	   ../priv/fdsrv \
 	   ../priv/fdsrv_drv.so 
 endif
-endif
 
 
 CFLAGS += -I$(ERL_C_INCLUDE_DIR) -I../config -I.
-LIBS = -lresolv -lnsl 
-LD_SHARED = gcc -shared
+LIBS = -lresolv $(SOCKET_LIBS) $(NSL_LIBS)
 
 #
 # Targets
