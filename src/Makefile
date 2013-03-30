@@ -1,5 +1,5 @@
 
-include ../../../support/include.mk
+include ../config/include.mk
 
 include ../vsn.mk
 VSN=$(FD_SERVER_VSN)
