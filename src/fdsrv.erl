@@ -7,7 +7,7 @@
 %%%
 
 -module(fdsrv).
--vsn("$Revision$ ").
+
 -behaviour(gen_server).
 
 %% External exports
